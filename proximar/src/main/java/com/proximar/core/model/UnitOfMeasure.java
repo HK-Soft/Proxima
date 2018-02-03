@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,16 +18,16 @@ import javax.persistence.Table;
 public class UnitOfMeasure {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = false)
 	private String code;
 
 	@Column(nullable = false)
 	private double conversionRate;
 
-	@OneToMany(mappedBy = "unitOfMeasure", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "unitOfMeasure", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ProductRate> rates = new HashSet<>();
 
 	public UnitOfMeasure() {
@@ -39,10 +40,6 @@ public class UnitOfMeasure {
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getCode() {

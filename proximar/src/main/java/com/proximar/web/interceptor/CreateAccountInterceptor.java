@@ -14,11 +14,10 @@ public class CreateAccountInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws ServletException {
 
-		if (noAccount()) {
-			if (!request.getServletPath().equalsIgnoreCase("/create-an-account")) { // avoid redirection infinite loop!
-				redirect(request, response, "/create-an-account");
-				return false; // request handled, no need to bother controller
-			}
+		if (noAccount() && !request.getServletPath().equalsIgnoreCase("/create-an-account")) { // avoid redirection
+																								// infinite loop!
+			redirect(request, response, "/create-an-account");
+			return false; // request handled, no need to bother controller
 		}
 
 		return true;

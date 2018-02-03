@@ -1,14 +1,12 @@
 package com.proximar;
 
 import org.apache.commons.text.RandomStringGenerator;
-import org.springframework.stereotype.Component;
 import static org.apache.commons.text.CharacterPredicates.DIGITS;
 import static org.apache.commons.text.CharacterPredicates.LETTERS;
 
 import java.rmi.AccessException;
 import java.util.UUID;
 
-@Component
 public class ProximarUtils {
 
 	private static int DEFAULT_RANDOM_STRING_COUNT = 8;
@@ -28,13 +26,15 @@ public class ProximarUtils {
 	 */
 	public static String randomString(int count) {
 		RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('0', 'z')
+				// .withinRange('A', 'Z')
 				.filteredBy(LETTERS, DIGITS).build();
 		return generator.generate(count);
 	}
 
 	/**
 	 * 
-	 * Generate a random Alpha-numerical String with the size of 8 Characters
+	 * Generate a random Alpha-numerical String with the size of 8 Characters (in
+	 * UpperCase)
 	 * 
 	 * @return a random string
 	 * 
@@ -45,7 +45,8 @@ public class ProximarUtils {
 
 	/**
 	 * 
-	 * creating a token according to the UUID Specification
+	 * creating a token according to the UUID Specification removing the '-'
+	 * separator
 	 * 
 	 * @return 128-bit size string
 	 * 

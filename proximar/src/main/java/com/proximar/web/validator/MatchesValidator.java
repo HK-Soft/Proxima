@@ -7,10 +7,9 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.proximar.web.form.RegistrationForm;
 import com.proximar.web.validator.annotation.Matches;
 
-public class MatchesValidator implements ConstraintValidator<Matches, RegistrationForm> {
+public class MatchesValidator implements ConstraintValidator<Matches, Object> {
 
 	private Matches matches;
 
@@ -20,15 +19,15 @@ public class MatchesValidator implements ConstraintValidator<Matches, Registrati
 	}
 
 	@Override
-	public boolean isValid(RegistrationForm registrationForm, ConstraintValidatorContext context) {
+	public boolean isValid(Object object, ConstraintValidatorContext context) {
 
 		List<Object> values = new ArrayList<>();
 
 		for (String fieldName : matches.fields()) {
 			try {
-				Field field = registrationForm.getClass().getDeclaredField(fieldName);
+				Field field = object.getClass().getDeclaredField(fieldName);
 				field.setAccessible(true);
-				Object value = field.get(registrationForm);
+				Object value = field.get(object);
 				values.add(value);
 			} catch (Exception e) {
 				// TODO: handle exception

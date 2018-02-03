@@ -2,26 +2,26 @@ package com.proximar.exception;
 
 import org.springframework.validation.BindingResult;
 
-import com.proximar.web.form.RegistrationForm;
+import com.proximar.core.dto.AccountDTO;
 
 @SuppressWarnings("serial")
 public class RegistrationException extends Exception {
 
-	private RegistrationForm registrationForm;
+	private AccountDTO accountDTO;
 
 	private BindingResult bindingResult;
 
-	public RegistrationException(RegistrationForm registrationForm, BindingResult bindingResult) {
-		this.setRegistrationForm(registrationForm);
+	public RegistrationException(AccountDTO accountDTO, BindingResult bindingResult) {
+		this.setAccountDTO(accountDTO);
 		this.setBindingResult(bindingResult);
 	}
 
-	public RegistrationForm getRegistrationForm() {
-		return registrationForm;
+	public AccountDTO getAccountDTO() {
+		return accountDTO;
 	}
 
-	public void setRegistrationForm(RegistrationForm registrationForm) {
-		this.registrationForm = registrationForm;
+	public void setAccountDTO(AccountDTO accountDTO) {
+		this.accountDTO = accountDTO;
 	}
 
 	public BindingResult getBindingResult() {
@@ -33,9 +33,8 @@ public class RegistrationException extends Exception {
 	}
 
 	public String getMessage() {
-		return super.getMessage() + 
-					"\n\t Form Data : " + registrationForm.toString() + 
-					"\n\t Errors List : " + bindingResult.getAllErrors();
+		return super.getMessage() + "\n\t Form Data : " + accountDTO.toString() + "\n\t Errors List : "
+				+ bindingResult.getAllErrors();
 	}
 
 }
