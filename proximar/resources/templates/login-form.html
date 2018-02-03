@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  data-layout-decorator="fragments/layout/layout-full-width">
+<head>
+	<title data-th-text="#{page.login.title}"></title>
+</head>
+
+<body class="login-container">
+
+<!-- Simple login form -->
+<form class="form-signin" role="form" data-th-action="@{/do-login}" method="post" data-layout-fragment="main-content">
+	<div class="panel panel-body login-form">
+		<div class="text-center">
+			<div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+			<h5 class="content-group"> 
+				<span  data-th-remove ="tag" data-th-text="#{login.account}"> Login to your account</span> 
+				<small class="display-block" data-th-text="#{login.credentials}">Enter your credentials below</small>
+			</h5>
+		</div>
+
+		<div class="form-group has-feedback has-feedback-left">
+			<input type="text" name="username" class="form-control" data-th-attr = "placeholder=#{form.placeholder.username}" required="required" autofocus="autofocus"/>
+			<div class="form-control-feedback">
+				<i class="icon-user text-muted"></i>
+			</div>
+		</div>
+
+		<div class="form-group has-feedback has-feedback-left">
+			<input type="password" name="password" class="form-control" data-th-attr = "placeholder=#{form.placeholder.password}" required="required"/>
+			<div class="form-control-feedback">
+				<i class="icon-lock2 text-muted"></i>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary btn-block"><span data-th-remove="tag" data-th-text="#{form.submit.login}"> Sign in</span> <i class="icon-circle-right2 position-right"></i></button>
+		</div>
+
+
+	</div>
+</form>
+<!-- /simple login form -->
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  data-layout-decorator="fragments/layout/layout-full-width">
+<head>
+	<title data-th-text="#{page.signup.title}"></title>
+</head>
+
+<body class="login-container">
+
+<!-- Simple registration form -->
+<form data-th-action="@{/create-an-account}" method="post" data-th-object="${registrationForm}" class="panel panel-body login-form width-400" data-layout-fragment="main-content">
+	<div class="text-center">
+		<div class="icon-object border-success text-success"><i class="icon-plus3"></i></div>
+		<h5 class="content-group"><small data-th-remove="tag" data-th-text="#{signup.account}">Create new account </small><small class="display-block" data-th-text="#{signup.fieldsrequired}">All fields are required</small></h5>
+	</div>
+
+	<div class="form-group has-feedback has-feedback-left">
+		<input type="text" th:field="*{username}" class="form-control" data-th-attr = "placeholder=#{form.placeholder.username}" />
+		<div class="form-control-feedback">
+			<i class="icon-user-check text-muted"></i>
+		</div>
+	</div>
+
+	<div class="form-group has-feedback has-feedback-left">
+		<input type="password" th:field="*{password}"  class="form-control" data-th-attr = "placeholder=#{form.placeholder.password}" />
+		<div class="form-control-feedback">
+			<i class="icon-user-lock text-muted"></i>
+		</div>
+	</div>
+	
+	<div class="form-group has-feedback has-feedback-left">
+		<input type="password" th:field="*{passwordConfirmation}" class="form-control" data-th-attr = "placeholder=#{form.placeholder.passwordconfirm}" />
+		<div class="form-control-feedback">
+			<i class="icon-user-lock text-muted"></i>
+		</div>
+	</div>
+
+	<button type="submit" class="btn bg-indigo-400 btn-block"><span data-th-remove="tag" data-th-text="#{form.submit.register}">Register</span> <i class="icon-circle-right2 position-right"></i></button>
+</form>
+<!-- /simple registration form -->
+
+</body>
+</html>

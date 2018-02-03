@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  data-th-attr="lang = ${#locale.Language} , dir = #{lang.dir} ">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE" data-th-text="#{application.shortname}"> Proximar </title>
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css"/>
+	<link data-th-href="'/assets/'+ #{lang.dir} +'/css/icons/icomoon/styles.css'" rel="stylesheet" type="text/css"/>
+	<link data-th-href="'/assets/'+ #{lang.dir} +'/css/bootstrap.css'" href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<link data-th-href="'/assets/'+ #{lang.dir} +'/css/core.css'" rel="stylesheet" type="text/css"/>
+	<link data-th-href="'/assets/'+ #{lang.dir} +'/css/components.css'" rel="stylesheet" type="text/css"/>
+	<link data-th-href="'/assets/'+ #{lang.dir} +'/css/colors.css'" rel="stylesheet" type="text/css"/>
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/js/core/libraries/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="/assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/loaders/blockui.min.js"></script>
+	<!-- /core JS files -->
+
+</head>
+
+<body class="navbar-top">
+
+	<!-- Main navbar -->
+	<div data-th-replace="fragments/fragment-main-navbar::main-navbar"></div>
+	<!-- /main navbar -->
+
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main sidebar -->
+			<div data-th-replace="fragments/fragment-main-sidebar::main-sidebar"></div>
+			<!-- /main sidebar -->
+
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- Page header -->
+				<div data-layout-fragment="page-header"></div>
+				<!-- /page header -->
+
+
+				<!-- Content area -->
+				<div class="content">
+					
+					<!-- Main content -->
+					<div data-layout-fragment="main-content"></div>
+					<!-- /main content -->
+					
+					<!-- Content footer -->
+					<div data-th-replace="fragments/fragment-content-footer::content-footer"></div>
+					<!-- /content footer -->
+
+				</div>
+				<!-- /content area -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- /page container -->
+
+</body>
+</html>

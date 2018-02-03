@@ -1,0 +1,19 @@
+<div class="sidebar-category sidebar-category-visible" data-th-fragment="sidebar-main-navigation">
+	<div class="category-content no-padding">
+		<ul class="navigation navigation-main navigation-accordion">
+
+			<!-- Main -->
+			<li><a  data-th-href="@{/accueil}"><i class="icon-home4"></i> <span data-th-text="#{dashboard.home}">Accueil</span></a></li>
+			<li>
+				<a><i class="icon-cube"></i> <span data-th-text="#{dashboard.sidebar.inventory}">Inventory management</span></a>
+				<ul>
+					<li><a data-th-href="@{/produits/nouveau}" data-th-text="#{dashboard.sidebar.addproduct}">َAdd product</a></li>
+					<li><a data-th-href="@{/produits}" data-th-text="#{dashboard.sidebar.allproducts}">Products list</a></li>
+				</ul>
+			</li>
+			<li class="navigation-divider"></li>
+			<!-- /main -->
+			
+		</ul>
+	</div>
+</div>

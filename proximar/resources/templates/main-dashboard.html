@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html 
+ 	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	data-layout-decorator="fragments/layout/layout-with-sidebar">
+	
+<head>
+	<title data-th-text="#{dashboard.home.title}"></title>
+	
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
+
+	<script type="text/javascript" src="/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
+	<!-- /theme JS files -->
+</head>
+
+<body>
+
+	<!-- Page header -->
+	<div class="page-header page-header-default" data-layout-fragment="page-header">
+		<div class="breadcrumb-line">
+			<ul class="breadcrumb">
+				<li><a data-th-href="@{/accueil}"><i class="icon-home2 position-left"></i> <span data-th-remove="tag" data-th-text="#{dashboard.home}"></span></a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /page header -->
+
+
+	<!-- Content area -->
+	<div class="content">
+		<div data-layout-fragment="main-content">
+		
+		</div>
+	</div>
+	<!-- /content area -->
+
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html 
+ 	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	data-layout-decorator="fragments/layout/layout-with-sidebar">
+	
+<head>
+	<title data-th-text="#{dashboard.addproduct.title}"></title>
+	
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/notifications/sweet_alert.min.js"></script>
+	
+	<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
+	<script type="text/javascript" src="/assets/js/pages/jqueryui_components.js"></script>
+	<script type="text/javascript" src="/assets/js/core/app.js"></script>
+	<!-- /theme JS files -->
+</head>
+
+<body>
+
+<!-- Page header -->
+<div class="page-header page-header-default" data-layout-fragment="page-header">
+	<div class="breadcrumb-line">
+		<ul class="breadcrumb">
+			<li><a data-th-href="@{/accueil}"><i class="icon-home2 position-left"></i> <span data-th-remove="tag" data-th-text="#{dashboard.home}"></span></a></li>
+			<li><a data-th-href="@{/produits}"><span data-th-remove="tag" data-th-text="#{dashboard.allproducts.title}"></span></a></li>
+			<li><a><span data-th-remove="tag" data-th-text="${product.code}"></span></a></li>
+		</ul>
+	</div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+	<div data-layout-fragment="main-content">		
+		<div  class="form-horizontal">
+		
+			<div class="panel panel-white">
+			
+				<!-- Action buttons -->
+				<div class="panel-heading">
+					<a  data-th-href="@{/produits/modifier/} + ${product.code}" class="btn btn-default btn-xs heading-btn mr-5" >
+						<i class="icon-pencil7 position-left"></i>
+						<span data-th-remove="tag" data-th-text="#{menu.button.edit}"> Edit</span> 
+					</a>
+					<button class="btn btn-default btn-xs heading-btn mr-5"  id="delete-btn" >
+						<i class="icon-bin  position-left" ></i>
+						<span data-th-remove="tag" data-th-text="#{menu.button.delete}"> Delete</span> 
+					</button>
+					<a href="#" class="btn btn-default btn-xs heading-btn mr-5">
+						<i class="icon-printer2 position-left"></i>
+						<span data-th-remove="tag" data-th-text="#{menu.button.print}">Print</span>
+					</a>
+					<a data-th-href="@{/produits/prix/} + ${product.code}" class="btn btn-default btn-xs heading-btn mr-5">
+						<i class=" icon-stack2 position-left"></i>
+						<span data-th-remove="tag" data-th-text="#{menu.button.pricing}">Other measurement units</span>
+					</a>
+					<a data-th-href="@{/produits/Ajustement/} + ${product.code}" class="btn btn-default btn-xs heading-btn mr-5">
+						<i class=" icon-stack2 position-left"></i>
+						<span data-th-remove="tag" data-th-text="#{menu.button.adjustment}">Adjustment</span>
+					</a>
+				</div>
+				<!-- /action buttons -->
+				
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-6">
+							<fieldset class="content-group">
+								<legend class="text-bold text-primary" data-th-text="#{form.products.basic}">Basic</legend>
+
+								<div class="form-group">
+									<label class="control-label col-lg-3" ><span data-th-remove="tag" data-th-text="#{form.products.code}">Code/Name</span><span class="text-danger">*</span></label>
+									<label class="control-label pull-right-sm col-lg-8" data-th-text="${product.code}"> --- </label>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-3" data-th-text="#{form.products.category}">Category </label>
+									<label class="control-label pull-right-sm col-lg-8">
+										<a class="label bg-success" data-th-text="${product.category}"> --- </a>
+									</label>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-3" ><span data-th-remove="tag" data-th-text="#{form.products.description}">Description </span><span class="text-danger">*</span></label>
+									<label class="control-label pull-right-sm col-lg-8"  data-th-text="${product.description}"> --- </label>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-3" data-th-text="#{form.products.measureunit}">Measer uite </label>
+									<label class="control-label pull-right-sm col-lg-8"  data-th-text="${product.basicUoM}"> --- </label>
+								</div>
+									
+							</fieldset>
+	
+						</div>
+						<div class="col-md-6">
+							<fieldset class="content-group">
+								<legend class="text-bold text-primary" data-th-text="#{form.products.pricture}">Picture</legend>
+								
+								<div class="col-lg-5 col-md-5">
+									<div class="thumbnail">
+										<div class="thumb">
+											<img src="/assets/images/3.jpg" alt=""/>
+										</div>
+							    	</div>
+								</div>
+								
+							</fieldset>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-flat">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-6">
+							<fieldset class="content-group">
+								<legend class="text-bold text-primary" data-th-text="#{form.products.pricing}">Pricing</legend>
+								<div class="form-group">
+									<label class="control-label col-lg-4" data-th-text="#{form.products.uomprice}">The price of the basic UoM </label>
+									<label class="control-label pull-right-sm col-lg-8" data-th-text="${product.price}">$$$</label>
+								</div>
+							</fieldset>
+						</div>		
+						<div class="col-md-6">
+							<fieldset class="content-group">
+								<legend class="text-bold text-primary" data-th-text="#{form.products.stocking}">Stock level information</legend>
+							
+								<div class="form-group">
+									<label class="control-label text-semibold col-lg-4" data-th-text="#{form.products.currentqts}">Availble Stock </label>
+									<label class="control-label pull-right-sm col-lg-8"  data-th-text="${product.stockLevel}"> NoN </label>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4"><span data-th-remove="tag" data-th-text="#{form.products.cost}"> cost</span><span class="text-danger">*</span></label>
+									<label class="control-label pull-right-sm col-lg-8" data-th-text="${product.cost}">$$$</label>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" data-th-text="#{form.products.reorderLevel}">Reorder level </label>
+									<label class="control-label pull-right-sm col-lg-8" data-th-text="${product.reorederLevel}"> NoN </label>
+								</div>
+							</fieldset>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		
+		</div>	
+		<script>
+		$('#delete-btn').on('click', () => {
+	        swal({
+	            title: "Are you sure?",
+	            text: "You will not be able to recover this imaginary file!",
+	            type: "warning",
+	            closeOnClickOutside: false,
+	            showCancelButton: true,
+	            confirmButtonColor: "#FF7043",
+	            confirmButtonText: "Yes, delete it!",
+	            closeOnConfirm: false,
+	            closeOnCancel: false
+	        }, function(isConfirm){
+	            if (isConfirm) {
+	            	alert("hello world");
+	            	$.ajax({
+	            		  url : "/"
+	            	});
+	                swal({
+	                    title: "Deleted!",
+	                    text: "Your imaginary file has been deleted.",
+	                    confirmButtonColor: "#66BB6A",
+	                    type: "success"
+	                });
+	            }
+	        });
+		});    
+		</script>
+	</div>
+</div>
+<!-- /content area -->
+
+</body>
+
+</html>

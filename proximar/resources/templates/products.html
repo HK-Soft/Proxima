@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html 
+ 	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	data-layout-decorator="fragments/layout/layout-with-sidebar">
+	
+<head>
+	<title data-th-text="#{dashboard.addproduct.title}"></title>
+	
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/forms/selects/select2.min.js"></script>
+	
+
+	<script type="text/javascript" src="/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="/assets/js/pages/datatables_basic.js"></script>
+	<!-- /theme JS files -->
+</head>
+
+<body>
+
+	<!-- Page header -->
+	<div class="page-header page-header-default" data-layout-fragment="page-header">
+		<div class="breadcrumb-line">
+			<ul class="breadcrumb">
+				<li><a data-th-href="@{/accueil}"><i class="icon-home2 position-left"></i> <span data-th-remove="tag" data-th-text="#{dashboard.home}"></span></a></li>
+				<li><a data-th-href="@{/produits}"><span data-th-remove="tag" data-th-text="#{dashboard.allproducts.title}"></span></a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /page header -->
+
+
+	<!-- Content area -->
+	<div class="content">
+		<div data-layout-fragment="main-content">
+			<!-- Pagination types -->
+			<div class="panel panel-white">
+				
+				<!-- Action buttons -->
+				<div class="panel-heading">
+					<a class="btn btn-default btn-xs heading-btn mr-5"  data-th-href="@{/produits/nouveau}">
+						<i class="icon-plus3 position-left" ></i>
+						<span data-th-remove="tag" data-th-text="#{dashboard.sidebar.addproduct}"> Add</span> 
+					</a>
+					<button  class="btn btn-default btn-xs heading-btn mr-5">
+						<i class="icon-printer2 position-left"></i>
+						<span data-th-remove="tag">Print</span>
+					</button>
+				</div>
+				<!-- /action buttons -->
+				<div class="panel-body">
+				
+					<table class="table datatable-pagination">
+						<thead>
+							<tr>
+								<th>Description</th>
+								<th>Code</th>
+								<th>Category</th>
+								<th>Available stock</th>
+								<th>Basic UoM</th>
+								<th>Price</th>
+								<th>Cost</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+						<th:block th:each="p : ${products}">
+							<tr>
+								<td class="col-md-3 col-sm-5" data-th-text="${p.description}"></td>
+								<td class="col-md-1 col-sm-1" data-th-text="${p.code}">QFDSQ3DE</td>
+								<td class="col-md-1 col-sm-1"><span class="label bg-success" data-th-text="${p.category}">Category</span></td>
+								<td class="col-md-1 col-sm-1" data-th-text="${p.stockLevel}">250</td>
+								<td class="col-md-1 col-sm-1" data-th-text="${p.basicUoM}">Unité</td>
+								<td class="col-md-1 col-sm-1" data-th-text="${p.price}">---</td>
+								<td class="col-md-1 col-sm-1" data-th-text="${p.cost}">---</td>
+								<td class="col-md-1 col-sm-1">
+									<ul class="icons-list">
+										<li class="text-primary-600"><a  data-th-href="@{produits/afficher/} + ${p.code}"><i class=" icon-eye"></i></a></li>
+										<li class="text-danger-600"><a href="#"><i class="icon-trash"></i></a></li>
+										<li class="text-teal-600"><a data-th-href="@{/produits/modifier/} + ${p.code}"><i class="icon-pencil7"></i></a></li>
+									</ul>
+								</td>
+							</tr>	
+						</th:block>	
+						</tbody>
+					</table>
+				
+				</div>
+			</div>
+			<!-- /pagination types -->
+		</div>
+	</div>
+	<!-- /content area -->
+
+
+</body>
+</html>

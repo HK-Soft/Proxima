@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html 
+ 	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	data-layout-decorator="fragments/layout/layout-with-sidebar">
+	
+<head>
+	<title data-th-text="#{dashboard.addproduct.title}"></title>
+	
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
+
+	<script type="text/javascript" src="/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="/assets/js/pages/uploader_bootstrap.js"></script>
+	<!-- /theme JS files -->
+</head>
+
+<body>
+
+	<!-- Page header -->
+	<div class="page-header page-header-default" data-layout-fragment="page-header">
+		<div class="breadcrumb-line">
+			<ul class="breadcrumb">
+				<li><a data-th-href="@{/accueil}"><i class="icon-home2 position-left"></i> <span data-th-remove="tag" data-th-text="#{dashboard.home}"></span></a></li>
+				<li><a data-th-href="@{/produits}"><span data-th-remove="tag" data-th-text="#{dashboard.allproducts.title}"></span></a></li>
+				<li><a><span data-th-remove="tag" data-th-text="${adjustProductForm.code}"></span></a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /page header -->
+
+
+	<!-- Content area -->
+	<div class="content">
+		<div data-layout-fragment="main-content">
+		<!-- Basic alert -->
+		<div class="alert alert-danger alert-styled-left"  th:if="${#fields.hasErrors('${adjustProductForm.*}')}">
+			<ul>
+  				 <li th:each="err : ${#fields.errors('${adjustProductForm.*}')}" th:text="${err}" />
+			</ul>
+	    </div>
+	    <!-- /basic alert -->
+		<form data-th-action="@{/produits/Ajustement/} + ${adjustProductForm.code}" method="post" data-th-object="${adjustProductForm}"  class="form-horizontal">
+		
+			<div class="panel panel-flat">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-6">
+							<fieldset class="content-group">
+								<legend class="text-bold text-primary" data-th-text="#{form.products.adjust}">Adjustement</legend>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" ><span data-th-remove="tag" data-th-text="#{form.products.code}">Code/Name</span></label>
+									<label class="control-label pull-right-sm col-lg-8" data-th-text="*{code}"> --- </label>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" ><span data-th-remove="tag" data-th-text="#{form.products.oldValue}">Previous quantity</span></label>
+									<label class="control-label pull-right-sm col-lg-8" data-th-text="*{oldQuantity}"> --- </label>
+								</div>
+								
+								<div class="form-group"  th:classappend="${#fields.hasErrors('newQuantity')} ? has-warning">
+									<label class="control-label col-lg-4"><span data-th-remove="tag" data-th-text="#{form.products.newValue}">Current Quantity </span><span class="text-danger">*</span> </label>
+									<div class="col-lg-8">
+										<input class="form-control ui-autocomplete-input" placeholder="" id="ac-basic" autocomplete="off" type="text" th:field="*{newQuantity}"/>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" ><span data-th-remove="tag" data-th-text="#{form.products.description}">Description </span><span class="text-danger">*</span></label>
+									<div class="col-lg-8">
+										<textarea  class="form-control" placeholder="" rows="2" th:field="*{description}"></textarea>
+									</div>
+								</div>
+							</fieldset>
+	
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="text-right">
+								<button type="submit" class="btn btn-primary"><div data-th-remove="tag" data-th-text="#{form.submit.save}" >Submit</div> <i class="icon-arrow-right14 position-right"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+			
+		
+			
+		</form>	
+		</div>
+	</div>
+	<!-- /content area -->
+
+
+</body>
+</html>
