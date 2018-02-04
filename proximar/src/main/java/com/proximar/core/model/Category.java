@@ -20,7 +20,7 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = false)
 	private String code;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

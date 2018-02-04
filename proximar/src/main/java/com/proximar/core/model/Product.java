@@ -23,6 +23,8 @@ import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.context.annotation.Primary;
+
 import com.proximar.core.dto.ProductDTO;
 
 @Entity
@@ -100,7 +102,13 @@ public class Product {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinTable(name = "product_alternative_uoms", 
 				joinColumns = @JoinColumn(name = "product_id"), 
-				inverseJoinColumns = @JoinColumn(name = "uom_code", referencedColumnName = "code")
+				inverseJoinColumns = {
+					@JoinColumn(name = "uom_id", referencedColumnName = "id"),
+					@JoinColumn(name = "uom_code", referencedColumnName = "code")
+				},
+				uniqueConstraints = {
+					@UniqueConstraint(columnNames = { "product_id" ,"uom_code"}) , 
+				}
 			  )
 	private Set<UnitOfMeasure> alternativeUsoM = new HashSet<>();
 
