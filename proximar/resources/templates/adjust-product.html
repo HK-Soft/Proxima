@@ -26,7 +26,7 @@
 			<ul class="breadcrumb">
 				<li><a data-th-href="@{/accueil}"><i class="icon-home2 position-left"></i> <span data-th-remove="tag" data-th-text="#{dashboard.home}"></span></a></li>
 				<li><a data-th-href="@{/produits}"><span data-th-remove="tag" data-th-text="#{dashboard.allproducts.title}"></span></a></li>
-				<li><a><span data-th-remove="tag" data-th-text="${adjustProductForm.code}"></span></a></li>
+				<li><a><span data-th-remove="tag" data-th-text="${adjustProductDTO.code}"></span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -37,13 +37,13 @@
 	<div class="content">
 		<div data-layout-fragment="main-content">
 		<!-- Basic alert -->
-		<div class="alert alert-danger alert-styled-left"  th:if="${#fields.hasErrors('${adjustProductForm.*}')}">
+		<div class="alert alert-danger alert-styled-left"  th:if="${#fields.hasErrors('${adjustProductDTO.*}')}">
 			<ul>
-  				 <li th:each="err : ${#fields.errors('${adjustProductForm.*}')}" th:text="${err}" />
+  				 <li th:each="err : ${#fields.errors('${adjustProductDTO.*}')}" th:text="${err}" />
 			</ul>
 	    </div>
 	    <!-- /basic alert -->
-		<form data-th-action="@{/produits/Ajustement/} + ${adjustProductForm.code}" method="post" data-th-object="${adjustProductForm}"  class="form-horizontal">
+		<form data-th-action="@{/produits/Ajustement/} + ${adjustProductDTO.code}" method="post" data-th-object="${adjustProductDTO}"  class="form-horizontal">
 		
 			<div class="panel panel-flat">
 				<div class="panel-body">

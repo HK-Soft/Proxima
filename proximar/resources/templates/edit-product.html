@@ -26,7 +26,7 @@
 			<ul class="breadcrumb">
 				<li><a data-th-href="@{/accueil}"><i class="icon-home2 position-left"></i> <span data-th-remove="tag" data-th-text="#{dashboard.home}"></span></a></li>
 				<li><a data-th-href="@{/produits}"><span data-th-remove="tag" data-th-text="#{dashboard.allproducts.title}"></span></a></li>
-				<li><a><span data-th-remove="tag" data-th-text="${editProductForm.code}"></span></a></li>
+				<li><a><span data-th-remove="tag" data-th-text="${productDTO.code}"></span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -37,29 +37,28 @@
 	<div class="content">
 		<div data-layout-fragment="main-content">
 		<!-- Basic alert -->
-		<div class="alert alert-danger alert-styled-left"  th:if="${#fields.hasErrors('${editProductForm.*}')}">
+		<div class="alert alert-danger alert-styled-left"  th:if="${#fields.hasErrors('${productDTO.*}')}">
 			<ul>
-  				 <li th:each="err : ${#fields.errors('${editProductForm.*}')}" th:text="${err}" />
+  				 <li th:each="err : ${#fields.errors('${productDTO.*}')}" th:text="${err}" />
 			</ul>
 	    </div>
 	    <!-- /basic alert -->
-		<form data-th-action="@{/produits/modifier/} + ${editProductForm.code}" method="post" data-th-object="${editProductForm}"  class="form-horizontal">
+		<form data-th-action="@{/produits/modifier/} + ${productDTO.code}" method="post" enctype="multipart/form-data" data-th-object="${productDTO}"  class="form-horizontal">
 		
 			<div class="panel panel-flat">
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-6">
 							<fieldset class="content-group">
+								
 								<legend class="text-bold text-primary" data-th-text="#{form.products.basic}">Basic</legend>
 
 								<div class="form-group"  th:classappend="${#fields.hasErrors('code')} ? has-warning" >
 									<label class="control-label col-lg-3" ><span data-th-remove="tag" data-th-text="#{form.products.code}">Code/Name</span><span class="text-danger">*</span></label>
 									<div class="col-lg-9">
-										<input type="text" class="form-control" placeholder="" th:field="*{code}" readonly="readonly" />
+										<input type="text" class="form-control" placeholder="" th:field="*{code}" />
 									</div>
 								</div>
-		
-		
 								
 								<div class="form-group" th:classappend="${#fields.hasErrors('category')} ? has-warning" >
 									<label class="control-label col-lg-3" data-th-text="#{form.products.category}">Category </label>
@@ -75,25 +74,24 @@
 									</div>
 								</div>
 								
-								<div class="form-group" th:classappend="${#fields.hasErrors('measureUnit')} ? has-warning" >
-									<label class="control-label col-lg-3" data-th-text="#{form.products.measureunit}">Measer uite </label>
+							</fieldset>
+	
+						</div>
+						
+						<div class="col-md-6">
+							
+							<fieldset class="content-group">
+								
+								<legend class="text-bold text-primary" data-th-text="#{form.products.pricture}">Picture</legend>
+								
+								<div class="form-group">
 									<div class="col-lg-9">
-										<input class="form-control ui-autocomplete-input" placeholder="" id="ac-basic" autocomplete="off" type="text"  th:field="*{measureUnit}"/>
+										<input type="file" class="file-input" data-show-caption="false" data-show-upload="false" name="file" value="*{picture}"/>
 									</div>
 								</div>
 								
 							</fieldset>
-	
-						</div>
-						<div class="col-md-6">
-							<fieldset class="content-group">
-								<legend class="text-bold text-primary" data-th-text="#{form.products.pricture}">Picture</legend>
-								<div class="form-group">
-									<div class="col-lg-9">
-										<input type="file" class="file-input" data-show-caption="false" data-show-upload="false"/>
-									</div>
-								</div>
-							</fieldset>
+							
 						</div>
 					</div>
 				</div>
@@ -104,21 +102,25 @@
 					<div class="row">
 						
 						<div class="col-md-6">
+						
 							<fieldset class="content-group">
+							
 								<legend class="text-bold text-primary" data-th-text="#{form.products.pricing}">Pricing</legend>
+
+								<div class="form-group" th:classappend="${#fields.hasErrors('basicUoM')} ? has-warning" >
+									<label class="control-label col-lg-4" data-th-text="#{form.products.measureunit}">Measer uite </label>
+									<div class="col-lg-8">
+										<input class="form-control ui-autocomplete-input" placeholder="" id="ac-basic" autocomplete="off" type="text"  th:field="*{basicUoM}"/>
+									</div>
+								</div>
+								
 								<div class="form-group" th:classappend="${#fields.hasErrors('price')} ? has-warning">
 									<label class="control-label col-lg-4" data-th-text="#{form.products.uomprice}">The price of the basic UoM </label>
 									<div class="col-lg-8">
 										<input type="text" class="form-control" placeholder=""  th:field="*{price}"/>
 									</div>
 								</div>
-							</fieldset>
-						</div>
-						
-						<div class="col-md-6">
-							<fieldset class="content-group">
-								<legend class="text-bold text-primary" data-th-text="#{form.products.stocking}">Stock level information</legend>
-							
+								
 								<div class="form-group" th:classappend="${#fields.hasErrors('cost')} ? has-warning">
 									<label class="control-label col-lg-4"><span data-th-remove="tag" data-th-text="#{form.products.cost}"> cost</span><span class="text-danger">*</span></label>
 									<div class="col-lg-8">
@@ -126,13 +128,28 @@
 									</div>
 								</div>
 								
+								
+							</fieldset>
+							
+						</div>
+						
+						<div class="col-md-6">
+						
+							<fieldset class="content-group">
+								
+								<legend class="text-bold text-primary" data-th-text="#{form.products.stocking}">Stock level information</legend>
+							
 								<div class="form-group"  th:classappend="${#fields.hasErrors('reorderLevel')} ? has-warning">
+								
 									<label class="control-label col-lg-4" data-th-text="#{form.products.reorderLevel}">Reorder level </label>
 									<div class="col-lg-8">
 										<input class="form-control ui-autocomplete-input" placeholder="" id="ac-basic" autocomplete="off" type="text" th:field="*{reorderLevel}"/>
 									</div>
+									
 								</div>
+								
 							</fieldset>
+							
 						</div>
 						
 					</div>

@@ -88,10 +88,7 @@
 									<label class="control-label pull-right-sm col-lg-8"  data-th-text="${product.description}"> --- </label>
 								</div>
 								
-								<div class="form-group">
-									<label class="control-label col-lg-3" data-th-text="#{form.products.measureunit}">Measer uite </label>
-									<label class="control-label pull-right-sm col-lg-8"  data-th-text="${product.basicUoM}"> --- </label>
-								</div>
+								
 									
 							</fieldset>
 	
@@ -103,7 +100,7 @@
 								<div class="col-lg-5 col-md-5">
 									<div class="thumbnail">
 										<div class="thumb">
-											<img src="/assets/images/3.jpg" alt=""/>
+											<img data-th-src="@{/files/}+${product.picture}" src="/assets/images/3.jpg" alt=""/>
 										</div>
 							    	</div>
 								</div>
@@ -120,9 +117,20 @@
 						<div class="col-md-6">
 							<fieldset class="content-group">
 								<legend class="text-bold text-primary" data-th-text="#{form.products.pricing}">Pricing</legend>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" data-th-text="#{form.products.measureunit}">Measer uite </label>
+									<label class="control-label pull-right-sm col-lg-8"  data-th-text="${product.basicUoM}"> --- </label>
+								</div>
+								
 								<div class="form-group">
 									<label class="control-label col-lg-4" data-th-text="#{form.products.uomprice}">The price of the basic UoM </label>
 									<label class="control-label pull-right-sm col-lg-8" data-th-text="${product.price}">$$$</label>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4"><span data-th-remove="tag" data-th-text="#{form.products.cost}"> cost</span><span class="text-danger">*</span></label>
+									<label class="control-label pull-right-sm col-lg-8" data-th-text="${product.cost}">$$$</label>
 								</div>
 							</fieldset>
 						</div>		
@@ -135,10 +143,7 @@
 									<label class="control-label pull-right-sm col-lg-8"  data-th-text="${product.stockLevel}"> NoN </label>
 								</div>
 								
-								<div class="form-group">
-									<label class="control-label col-lg-4"><span data-th-remove="tag" data-th-text="#{form.products.cost}"> cost</span><span class="text-danger">*</span></label>
-									<label class="control-label pull-right-sm col-lg-8" data-th-text="${product.cost}">$$$</label>
-								</div>
+							
 								
 								<div class="form-group">
 									<label class="control-label col-lg-4" data-th-text="#{form.products.reorderLevel}">Reorder level </label>
